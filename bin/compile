@@ -81,7 +81,7 @@ cd $LIBTOOL_BUILD
 wget http://ftp.gnu.org/gnu/libtool/libtool-2.2.6a.tar.gz
 gzip -dc < libtool-2.2.6a.tar.gz | tar -xf -
 cd libtool-2.2.6
-./configure --prefix=$BUILD_DIR/.tools/libtool
+./configure --prefix=$BUILD_DIR/.tools/automake    # libtool prefix must the same as the automake 
 make 
 make install 
 echo "libtool installed" | indent 

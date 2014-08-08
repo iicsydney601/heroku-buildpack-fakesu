@@ -52,7 +52,7 @@ DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make
 DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make install 
 echo "debootstrap installed" | indent
 
-echo "----->Fetching, installing and vendoring autoconf into /app/
+echo "----->Fetching, installing and vendoring autoconf into /app/"
 cd $AUTOCONF_BUILD
 wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.64.tar.gz
 gzip -dc < autoconf-2.64.tar.gz | tar -xf -

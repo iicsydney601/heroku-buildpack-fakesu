@@ -18,8 +18,11 @@ function indent() {
 }
 
 BUILDPACK_DIR=`cd $(dirname $0); cd ..; pwd`
-BUILD_DIR=$1
+#BUILD_DIR=$1
+#CACHE_DIR=$2
+BUILD_DIR=/tmp/staged/app
 CACHE_DIR=$2
+
 
 WGET_BUILD="$(mktmpdir wget)"
 DEBOOTSTRAP_BUILD="$(mktmpdir debootstrap)"
@@ -44,7 +47,7 @@ tar jxvf wget-1.13.4.tar.bz2
 cd wget-1.13.4
 ./configure --prefix=$CACHE_DIR/.tools/wget --without-ssl 
 make > /dev/null
-make install > /dev/null
+make install 
 echo "wget installed" | indent
 
 echo "-----> Fetching and installing debootstrap"

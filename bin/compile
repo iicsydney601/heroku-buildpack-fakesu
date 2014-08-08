@@ -79,7 +79,6 @@ echo "automake installed" | indent
 echo "----->Fetching, installing libtool "
 cd $LIBTOOL_BUILD
 wget http://ftp.gnu.org/gnu/libtool/libtool-2.2.6a.tar.gz
-cd /tmp/libtool
 gzip -dc < libtool-2.2.6a.tar.gz | tar -xf -
 cd libtool-2.2.6a
 ./configure --prefix=$BUILD_DIR/.tools/libtool

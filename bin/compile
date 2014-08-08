@@ -34,7 +34,7 @@ mkdir -p $BUILD_DIR/.tools/automake
 mkdir -p $BUILD_DIR/.tools/libtool
 mkdir -p $CACHE_DIR/.tools/{wget,debootstrap}
 
-export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin:$BUILD_DIR/.tools/automake/bin:$BUILD_DIR/.tools/libtool/bin
+export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin:$BUILD_DIR/.tools/automake/bin:$BUILD_DIR/.tools/libtool/share
 export DEBOOTSTRAP_DIR=$CACHE_DIR/.tools/debootstrap/usr/share/debootstrap
 
 echo "-----> Fetching and installing wget"

@@ -24,13 +24,11 @@ CACHE_DIR=$2
 WGET_BUILD="$(mktmpdir wget)"
 DEBOOTSTRAP_BUILD="$(mktmpdir debootstrap)"
 FAKECHROOT_BUILD="$(mktmpdir fakechroot)"
-AUTOCONF_BUILD="$(mktmpdir autoconf)"
 
 mkdir -p $BUILD_DIR/.tools/fakechroot
-mkdir -p $BUILD_DIR/.tools/autoconf
 mkdir -p $CACHE_DIR/.tools/{wget,debootstrap}
 
-export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin
+export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin
 export DEBOOTSTRAP_DIR=$CACHE_DIR/.tools/debootstrap/usr/share/debootstrap
 
 echo "-----> Fetching and installing wget"
@@ -51,16 +49,6 @@ cd debootstrap-1.0.53
 DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make 
 DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make install 
 echo "debootstrap installed" | indent
-
-echo "----->Fetching, installing and vendoring autoconf into /app/
-cd $AUTOCONF_BUILD
-wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.64.tar.gz
-gzip -dc < autoconf-2.64.tar.gz | tar -xf -
-cd autoconf-2.64
-./configure --prefix=$BUILD_DIR/.tools/autoconf
-make
-make install
-echo "autoconf installed" | indent
 
 echo "-----> Fetching, installing and vendoring fakechroot into /app/.tools/fakechroot/"
 cd $FAKECHROOT_BUILD

@@ -34,9 +34,9 @@ mkdir -p $BUILD_DIR/.tools/automake
 mkdir -p $BUILD_DIR/.tools/libtool
 mkdir -p $CACHE_DIR/.tools/{wget,debootstrap}
 
-export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin:$BUILD_DIR/.tools/automake/bin:$BUILD_DIR/.tools/libtool/share
+export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin:$BUILD_DIR/.tools/automake/bin:$BUILD_DIR/.tools/libtool/bin
 export DEBOOTSTRAP_DIR=$CACHE_DIR/.tools/debootstrap/usr/share/debootstrap
-
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/.tools/libtool/lib
 echo "-----> Fetching and installing wget"
 cd $WGET_BUILD
 curl -O http://ftp.gnu.org/gnu/wget/wget-1.13.4.tar.bz2 

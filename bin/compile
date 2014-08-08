@@ -26,13 +26,15 @@ DEBOOTSTRAP_BUILD="$(mktmpdir debootstrap)"
 FAKECHROOT_BUILD="$(mktmpdir fakechroot)"
 AUTOCONF_BUILD="$(mktmpdir autoconf)"
 AUTOMAKE_BUILD="$(mktmpdir automake)"
+LIBTOOL_BUILD="$(mktmpdir libtool)"
 
 mkdir -p $BUILD_DIR/.tools/fakechroot
 mkdir -p $BUILD_DIR/.tools/autoconf
 mkdir -p $BUILD_DIR/.tools/automake
+mkdir -p $BUILD_DIR/.tools/libtool
 mkdir -p $CACHE_DIR/.tools/{wget,debootstrap}
 
-export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin::$BUILD_DIR/.tools/automake/bin
+export PATH=/sbin:/usr/sbin:$PATH:$CACHE_DIR/.tools/wget/bin:$CACHE_DIR/.tools/debootstrap/usr/sbin:$BUILD_DIR/.tools/fakechroot/sbin:$BUILD_DIR/.tools/fakechroot/bin:$BUILD_DIR/.tools/autoconf/bin:$BUILD_DIR/.tools/automake/bin:$BUILD_DIR/.tools/libtool/bin
 export DEBOOTSTRAP_DIR=$CACHE_DIR/.tools/debootstrap/usr/share/debootstrap
 
 echo "-----> Fetching and installing wget"
@@ -54,7 +56,7 @@ DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make
 DESTDIR=$CACHE_DIR/.tools/debootstrap fakeroot make install 
 echo "debootstrap installed" | indent
 
-echo "----->Fetching, installing and vendoring autoconf "
+echo "----->Fetching, installing autoconf "
 cd $AUTOCONF_BUILD
 wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.64.tar.gz
 gzip -dc < autoconf-2.64.tar.gz | tar -xf -
@@ -64,15 +66,26 @@ make >/dev/null
 make install >/dev/null 
 echo "autoconf installed" | indent
 
-echo "----->Fetching, installing and vendoring automake "
+echo "----->Fetching, installing automake "
 cd $AUTOMAKE_BUILD
 wget http://ftp.gnu.org/gnu/automake/automake-1.11.tar.gz
 gzip -dc < automake-1.11.tar.gz | tar -xf -
 cd automake-1.11
 ./configure --prefix=$BUILD_DIR/.tools/automake 
+make > /dev/null 
+make install >/dev/null
+echo "automake installed" | indent 
+
+echo "----->Fetching, installing libtool "
+cd $LIBTOOL_BUILD
+wget http://ftp.gnu.org/gnu/libtool/libtool-2.2.6a.tar.gz
+cd /tmp/libtool
+gzip -dc < libtool-2.2.6a.tar.gz | tar -xf -
+cd libtool-2.2.6a
+./configure --prefix=$BUILD_DIR/.tools/libtool
 make 
 make install 
-echo "automake installed" | indent 
+echo "libtool installed" | indent 
 
 echo "-----> Fetching, installing and vendoring fakechroot into /app/.tools/fakechroot/"
 cd $FAKECHROOT_BUILD

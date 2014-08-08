@@ -80,7 +80,7 @@ echo "----->Fetching, installing libtool "
 cd $LIBTOOL_BUILD
 wget http://ftp.gnu.org/gnu/libtool/libtool-2.2.6a.tar.gz
 gzip -dc < libtool-2.2.6a.tar.gz | tar -xf -
-cd libtool-2.2.6a
+cd libtool-2.2.6
 ./configure --prefix=$BUILD_DIR/.tools/libtool
 make 
 make install 
